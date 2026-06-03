@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import { redirect } from 'next/navigation';
 import styles from './(auth)/auth.module.css';
 
 export default function Home() {
@@ -225,4 +226,4 @@ export default function Home() {
       </div>
     </div>
   );
-}
+};
