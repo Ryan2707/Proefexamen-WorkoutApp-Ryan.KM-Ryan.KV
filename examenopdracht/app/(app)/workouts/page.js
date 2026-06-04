@@ -27,9 +27,6 @@ export default function WorkoutsPage() {
       {/* Header */}
       <div className={styles.header}>
         <h1 className={styles.title}>Mijn Workouts</h1>
-        <Link href="/workouts/new">
-          <button className={styles.btnPrimary}>Nieuwe workout</button>
-        </Link>
       </div>
 
       {/* Category filters */}

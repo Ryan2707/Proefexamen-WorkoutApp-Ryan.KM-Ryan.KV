@@ -36,10 +36,10 @@ export default function Sidebar() {
           Workouts
         </Link>
         <Link
-          href="/exercises"
+          href="/workouts/new"
           style={{ color: "inherit", textDecoration: "none" }}
         >
-          Oefeningen
+          Nieuwe workout
         </Link>
         <Link
           href="/agenda"
