@@ -54,6 +54,11 @@
   background: #ffffff;
   color: #888888;
   transition: background 0.2s, color 0.2s;
+  text-align: center;     
+  text-decoration: none;   
+  display: flex;            
+  align-items: center;      
+  justify-content: center;  
 }
 
 .tab:first-child {
