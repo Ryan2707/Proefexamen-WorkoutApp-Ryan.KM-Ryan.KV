@@ -2,17 +2,18 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import styles from '../../../../css/NewWorkoutPage.module.css';
+import styles from '@/css/new.module.css';
 
 export default function NewWorkoutPage() {
   const router = useRouter();
-  const [name, setName] = useState('');
-  const [date, setDate] = useState('');
+
+  const [name, setName]         = useState('');
+  const [date, setDate]         = useState('');
   const [category, setCategory] = useState('');
   const [duration, setDuration] = useState('');
-  const [notes, setNotes] = useState('');
+  const [notes, setNotes]       = useState('');
   const [exercises, setExercises] = useState([]);
-  const [saving, setSaving] = useState(false);
+  const [saving, setSaving]     = useState(false);
 
   const addExercise = () => {
     setExercises(prev => [...prev, { name: '', sets: '', reps: '', weight: '' }]);
@@ -23,11 +24,15 @@ export default function NewWorkoutPage() {
   };
 
   const updateExercise = (i, field, value) => {
-    setExercises(prev => prev.map((ex, idx) => idx === i ? { ...ex, [field]: value } : ex));
+    setExercises(prev =>
+      prev.map((ex, idx) => idx === i ? { ...ex, [field]: value } : ex)
+    );
   };
 
   const handleSave = async () => {
     if (!name.trim()) return alert('Geef een naam op');
+    if (!date) return alert('Kies een datum');
+
     setSaving(true);
     try {
       const res = await fetch('/api/workouts', {
@@ -58,7 +63,6 @@ export default function NewWorkoutPage() {
               className={styles.input}
               value={name}
               onChange={e => setName(e.target.value)}
-              placeholder=""
             />
           </div>
           <div className={styles.field}>
@@ -104,7 +108,6 @@ export default function NewWorkoutPage() {
           />
         </div>
 
-        {/* Exercises */}
         <h2 className={styles.sectionTitle} style={{ marginTop: 24 }}>Oefeningen</h2>
 
         {exercises.length > 0 && (
@@ -126,7 +129,7 @@ export default function NewWorkoutPage() {
                       className={styles.inlineInput}
                       value={ex.name}
                       onChange={e => updateExercise(i, 'name', e.target.value)}
-                      placeholder="Naam"
+                      placeholder="Naam oefening"
                     />
                   </td>
                   <td className={styles.td}>
@@ -154,7 +157,9 @@ export default function NewWorkoutPage() {
                     />
                   </td>
                   <td className={styles.td}>
-                    <button className={styles.deleteBtn} onClick={() => removeExercise(i)}>🗑</button>
+                    <button className={styles.deleteBtn} onClick={() => removeExercise(i)}>
+                      🗑
+                    </button>
                   </td>
                 </tr>
               ))}
@@ -166,7 +171,6 @@ export default function NewWorkoutPage() {
           Oefening toevoegen
         </button>
 
-        {/* Actions */}
         <div className={styles.actions}>
           <button className={styles.btnCancel} onClick={() => router.push('/workouts')}>
             Annuleren
