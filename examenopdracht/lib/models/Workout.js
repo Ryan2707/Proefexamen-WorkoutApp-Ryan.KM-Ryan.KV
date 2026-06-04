@@ -15,15 +15,8 @@ const WorkoutSchema = new mongoose.Schema({
   durationMax: { type: Number },
   notes:       { type: String },
   exercises:   { type: [ExerciseEntrySchema], default: [] },
-  userId:      { type: String },  // for auth later
+  userId:      { type: String },
 }, { timestamps: true });
 
-// Virtual for exerciseCount
-WorkoutSchema.virtual('exerciseCount').get(function () {
-  return this.exercises.length;
-});
-
-WorkoutSchema.set('toJSON', { virtuals: true });
-WorkoutSchema.set('toObject', { virtuals: true });
-
-export default mongoose.models.Workout || mongoose.model('Workout', WorkoutSchema);
+export default mongoose.models.Workout ||
+  mongoose.model('Workout', WorkoutSchema);

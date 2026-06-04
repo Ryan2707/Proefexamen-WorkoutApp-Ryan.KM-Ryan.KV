@@ -2,14 +2,14 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import styles from '../../../css/workouts.module.css';
+import styles from '@/css/workouts.module.css';
 
 const FILTERS = ['Alle', 'Kracht', 'Cardio'];
 
 export default function WorkoutsPage() {
-  const [workouts, setWorkouts] = useState([]);
-  const [filter, setFilter] = useState('Alle');
-  const [loading, setLoading] = useState(true);
+  const [workouts, setWorkouts]   = useState([]);
+  const [filter, setFilter]       = useState('Alle');
+  const [loading, setLoading]     = useState(true);
 
   useEffect(() => {
     fetch('/api/workouts')
@@ -24,6 +24,7 @@ export default function WorkoutsPage() {
 
   return (
     <div className={styles.page}>
+      {/* Header */}
       <div className={styles.header}>
         <h1 className={styles.title}>Mijn Workouts</h1>
         <Link href="/workouts/new">
@@ -31,6 +32,7 @@ export default function WorkoutsPage() {
         </Link>
       </div>
 
+      {/* Category filters */}
       <div className={styles.filters}>
         {FILTERS.map(f => (
           <button
@@ -43,18 +45,25 @@ export default function WorkoutsPage() {
         ))}
       </div>
 
+      {/* Workout list */}
       <div className={styles.list}>
-        {loading && <div className={styles.empty}>Laden...</div>}
+        {loading && (
+          <div className={styles.empty}>Laden...</div>
+        )}
+
         {!loading && filtered.length === 0 && (
           <div className={styles.empty}>Geen workouts gevonden.</div>
         )}
+
         {filtered.map(workout => (
           <div key={workout._id} className={styles.workoutRow}>
             <div className={styles.workoutInfo}>
               <div className={styles.workoutName}>{workout.name}</div>
               <div className={styles.workoutMeta}>
-                {workout.exerciseCount ?? 0} oefeningen
-                {workout.durationMin ? ` · ${workout.durationMin}${workout.durationMax ? ` / ${workout.durationMax}` : ''} min` : ''}
+                {workout.exerciseCount} oefeningen
+                {workout.durationMin
+                  ? ` · ${workout.durationMin}${workout.durationMax ? ` / ${workout.durationMax}` : ''} min`
+                  : ''}
               </div>
             </div>
             <Link href={`/workouts/${workout._id}/edit`}>

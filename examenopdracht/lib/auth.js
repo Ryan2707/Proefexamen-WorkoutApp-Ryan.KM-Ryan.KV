@@ -1,7 +1,7 @@
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import bcrypt from 'bcryptjs';
-import dbConnect from '@/lib/db';
+import { connectDB } from '@/lib/db';
 import User from '@/lib/models/User';
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
@@ -17,7 +17,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           throw new Error('E-mail en wachtwoord zijn verplicht');
         }
 
-        await dbConnect();
+        await connectDB();
 
         const user = await User.findOne({ email: credentials.email });
 
