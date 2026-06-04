@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
-import dbConnect from '@/lib/db';
+import { connectDB } from '@/lib/db';
 import User from '@/lib/models/User';
 
 export async function POST(request) {
@@ -21,7 +21,7 @@ export async function POST(request) {
       );
     }
 
-    await dbConnect();
+    await connectDB();
 
     const existingUser = await User.findOne({ email: email.toLowerCase() });
     if (existingUser) {

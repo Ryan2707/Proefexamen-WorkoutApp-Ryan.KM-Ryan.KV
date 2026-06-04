@@ -1,4 +1,4 @@
-import './globals.css';
+import '@/css/globals.css';
 
 export const metadata = {
   title: 'WorkoutApp',
