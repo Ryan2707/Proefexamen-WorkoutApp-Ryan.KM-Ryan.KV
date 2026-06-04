@@ -206,3 +206,36 @@
     padding: 28px 20px;
   }
 }
+
+.authLogo {
+  width: 48px;
+  height: 48px;
+  background: #3b5bdb;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+}
+
+.authLogo svg {
+  width: 26px;
+  height: 26px;
+  fill: #ffffff;
+}
+
+.authFooter {
+  text-align: center;
+  font-size: 14px;
+  color: #888888;
+}
+
+.authLink {
+  color: #3b5bdb;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.authLink:hover {
+  text-decoration: underline;
+}

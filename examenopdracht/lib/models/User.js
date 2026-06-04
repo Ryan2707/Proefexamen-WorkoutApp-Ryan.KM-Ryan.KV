@@ -4,7 +4,7 @@ const UserSchema = new mongoose.Schema(
   {
     userId: {
       type: String,
-      default: () => uuidv4(),
+      default: () => crypto.randomUUID(),
       unique: true,
       required: true,
     },
