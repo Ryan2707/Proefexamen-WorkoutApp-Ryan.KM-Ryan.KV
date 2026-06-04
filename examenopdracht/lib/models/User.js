@@ -1,11 +1,10 @@
 import mongoose from 'mongoose';
-import { v4 as uuidv4 } from 'uuid';
 
 const UserSchema = new mongoose.Schema(
   {
     userId: {
       type: String,
-      default: () => uuidv4(),
+      default: () => crypto.randomUUID(),
       unique: true,
       required: true,
     },

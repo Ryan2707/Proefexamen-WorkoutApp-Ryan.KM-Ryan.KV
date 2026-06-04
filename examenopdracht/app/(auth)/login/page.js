@@ -71,14 +71,13 @@ export default function LoginPage() {
     <div className={styles.authPage}>
       <div className={styles.authCard}>
         <div className={styles.authHeader}>
-          <div className={styles.authLogo}>
-            {/* Dumbbell icon */}
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M20.57 14.86L22 13.43 20.57 12 17 15.57 8.43 7 12 3.43 10.57 2 9.14 3.43 7.71 2 5.57 4.14 4.14 2.71 2.71 4.14l1.43 1.43L2 7.71l1.43 1.43L2 10.57 3.43 12 7 8.43 15.57 17 12 20.57 13.43 22l1.43-1.43L16.29 22l2.14-2.14 1.43 1.43 1.43-1.43-1.43-1.43L22 16.29l-1.43-1.43z"/>
-            </svg>
-          </div>
-          <h1 className={styles.authTitle}>Welkom terug</h1>
-          <p className={styles.authSubtitle}>Log in op je Workout App account</p>
+          <h1 className={styles.authTitle}>Welkom bij WorkoutApp</h1>
+          <p className={styles.authSubtitle}>Registreer of log in om te beginnen</p>
+        </div>
+
+        <div className={styles.tabs}>
+          <Link href="/register" className={styles.tab}>Registreren</Link>
+          <button className={`${styles.tab} ${styles.tabActive}`}>Inloggen</button>
         </div>
 
         <form className={styles.authForm} onSubmit={handleSubmit} noValidate>
@@ -92,9 +91,7 @@ export default function LoginPage() {
           )}
 
           <div className={styles.formGroup}>
-            <label htmlFor="email" className={styles.formLabel}>
-              E-mailadres
-            </label>
+            <label htmlFor="email" className={styles.formLabel}>E-mailadres</label>
             <input
               id="email"
               name="email"
@@ -106,15 +103,11 @@ export default function LoginPage() {
               placeholder="jouw@email.nl"
               disabled={loading}
             />
-            {errors.email && (
-              <p className={styles.fieldError}>{errors.email}</p>
-            )}
+            {errors.email && <p className={styles.fieldError}>{errors.email}</p>}
           </div>
 
           <div className={styles.formGroup}>
-            <label htmlFor="password" className={styles.formLabel}>
-              Wachtwoord
-            </label>
+            <label htmlFor="password" className={styles.formLabel}>Wachtwoord</label>
             <input
               id="password"
               name="password"
@@ -126,9 +119,7 @@ export default function LoginPage() {
               placeholder="••••••••"
               disabled={loading}
             />
-            {errors.password && (
-              <p className={styles.fieldError}>{errors.password}</p>
-            )}
+            {errors.password && <p className={styles.fieldError}>{errors.password}</p>}
           </div>
 
           <button
@@ -146,13 +137,6 @@ export default function LoginPage() {
             )}
           </button>
         </form>
-
-        <div className={styles.authFooter} style={{ marginTop: '24px' }}>
-          Nog geen account?{' '}
-          <Link href="/register" className={styles.authLink}>
-            Registreer hier
-          </Link>
-        </div>
       </div>
     </div>
   );
