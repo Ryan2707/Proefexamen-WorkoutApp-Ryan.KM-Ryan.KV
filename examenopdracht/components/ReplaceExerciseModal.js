@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import styles from '..css/ReplaceExerciseModal.module.css';
+import styles from '@/css/ReplaceExerciseModal.module.css';
 
 const MUSCLE_GROUPS = ['Alle', 'Borst', 'Schouders', 'Triceps', 'Rug'];
 

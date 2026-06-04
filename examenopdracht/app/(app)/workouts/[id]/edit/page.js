@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import ReplaceExerciseModal from '@/components/ReplaceExerciseModal';
-import styles from '../../../../css/EditWorkoutPage.module.css';
+import styles from '@/css/EditWorkoutPage.module.css';
 
 export default function EditWorkoutPage() {
   const router = useRouter();
