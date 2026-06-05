@@ -2,20 +2,18 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
-import ReplaceExerciseModal from '@/components/ReplaceExerciseModal';
-import styles from '@/css/EditWorkoutPage.module.css';
+import styles from '@/css/edit.module.css';
 
 export default function EditWorkoutPage() {
-  const router = useRouter();
-  const { id } = useParams();
+  const router     = useRouter();
+  const { id }     = useParams();
 
-  const [workout, setWorkout] = useState(null);
-  const [name, setName] = useState('');
-  const [date, setDate] = useState('');
+  const [workout, setWorkout]     = useState(null);
+  const [name, setName]           = useState('');
+  const [date, setDate]           = useState('');
   const [exercises, setExercises] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [saving, setSaving] = useState(false);
-  const [replaceIdx, setReplaceIdx] = useState(null);
+  const [loading, setLoading]     = useState(true);
+  const [saving, setSaving]       = useState(false);
 
   useEffect(() => {
     if (!id) return;
@@ -31,20 +29,22 @@ export default function EditWorkoutPage() {
       .catch(() => setLoading(false));
   }, [id]);
 
-  const removeExercise = (i) => setExercises(prev => prev.filter((_, idx) => idx !== i));
-
   const addExercise = () => {
     setExercises(prev => [...prev, { name: '', sets: 3, reps: 10, weight: '' }]);
   };
 
-  const handleReplace = (i, newExercise) => {
-    setExercises(prev => prev.map((ex, idx) =>
-      idx === i ? { ...ex, name: newExercise.name } : ex
-    ));
-    setReplaceIdx(null);
+  const removeExercise = (i) => {
+    setExercises(prev => prev.filter((_, idx) => idx !== i));
+  };
+
+  const updateExercise = (i, field, value) => {
+    setExercises(prev =>
+      prev.map((ex, idx) => idx === i ? { ...ex, [field]: value } : ex)
+    );
   };
 
   const handleSave = async () => {
+    if (!name.trim()) return alert('Geef een naam op');
     setSaving(true);
     try {
       const res = await fetch(`/api/workouts/${id}`, {
@@ -70,7 +70,9 @@ export default function EditWorkoutPage() {
         <h1 className={styles.title}>{workout.name} bewerken</h1>
         <p className={styles.subtitle}>
           {exercises.length} oefeningen
-          {workout.durationMin ? ` · ${workout.durationMin}${workout.durationMax ? ` / ${workout.durationMax}` : ''} min` : ''}
+          {workout.durationMin
+            ? ` · ${workout.durationMin}${workout.durationMax ? ` / ${workout.durationMax}` : ''} min`
+            : ''}
         </p>
       </div>
 
@@ -97,7 +99,6 @@ export default function EditWorkoutPage() {
           </div>
         </div>
 
-        {/* Exercises */}
         <h2 className={styles.sectionTitle} style={{ marginTop: 24 }}>Oefeningen</h2>
 
         <table className={styles.table}>
@@ -113,17 +114,36 @@ export default function EditWorkoutPage() {
           <tbody>
             {exercises.map((ex, i) => (
               <tr key={i} className={styles.tr}>
-                <td className={styles.td}>{ex.name}</td>
-                <td className={styles.td}>{ex.sets}</td>
-                <td className={styles.td}>{ex.reps}</td>
-                <td className={styles.td}>{ex.weight ? `${ex.weight} kg` : '—'}</td>
                 <td className={styles.td}>
-                  <button
-                    className={styles.replaceBtn}
-                    onClick={() => setReplaceIdx(i)}
-                  >
-                    Vervangen
-                  </button>
+                  <input
+                    className={styles.inlineInput}
+                    value={ex.name}
+                    onChange={e => updateExercise(i, 'name', e.target.value)}
+                  />
+                </td>
+                <td className={styles.td}>
+                  <input
+                    className={`${styles.inlineInput} ${styles.narrow}`}
+                    type="number"
+                    value={ex.sets}
+                    onChange={e => updateExercise(i, 'sets', e.target.value)}
+                  />
+                </td>
+                <td className={styles.td}>
+                  <input
+                    className={`${styles.inlineInput} ${styles.narrow}`}
+                    type="number"
+                    value={ex.reps}
+                    onChange={e => updateExercise(i, 'reps', e.target.value)}
+                  />
+                </td>
+                <td className={styles.td}>
+                  <input
+                    className={`${styles.inlineInput} ${styles.narrow}`}
+                    value={ex.weight}
+                    onChange={e => updateExercise(i, 'weight', e.target.value)}
+                    placeholder="kg"
+                  />
                 </td>
                 <td className={styles.td}>
                   <button
@@ -151,15 +171,6 @@ export default function EditWorkoutPage() {
           </button>
         </div>
       </div>
-
-      {/* Replace modal */}
-      {replaceIdx !== null && (
-        <ReplaceExerciseModal
-          exercise={exercises[replaceIdx]}
-          onSelect={(newEx) => handleReplace(replaceIdx, newEx)}
-          onClose={() => setReplaceIdx(null)}
-        />
-      )}
     </div>
   );
 }
