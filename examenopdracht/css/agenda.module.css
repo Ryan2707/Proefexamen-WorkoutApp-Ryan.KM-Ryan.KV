@@ -1,0 +1,194 @@
+.page {
+  padding: 32px 40px;
+}
+
+.title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.3px;
+  margin-bottom: 20px;
+}
+
+/* ── Calendar card ── */
+.calendarCard {
+  background: var(--content-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  max-width: 900px;
+}
+
+/* ── Navigation ── */
+.navRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.navBtn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  padding: 5px 14px;
+  border-radius: var(--radius);
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.navBtn:hover {
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+.monthLabel {
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text-primary);
+}
+
+/* ── Day headers ── */
+.dayHeaders {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  border-bottom: 1px solid var(--border);
+}
+
+.dayHeader {
+  text-align: center;
+  padding: 8px 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.weekendHeader {
+  color: var(--blue);
+  background: #f0f6ff;
+}
+
+/* ── Calendar rows ── */
+.calRow {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  border-bottom: 1px solid var(--border);
+}
+
+.calRow:last-child {
+  border-bottom: none;
+}
+
+/* ── Cells ── */
+.cell {
+  min-height: 72px;
+  padding: 6px 8px;
+  border-right: 1px solid var(--border);
+  cursor: pointer;
+  transition: background 0.1s;
+  vertical-align: top;
+}
+
+.cell:last-child {
+  border-right: none;
+}
+
+.cell:hover:not(.emptyCell) {
+  background: #f8f9fa;
+}
+
+.emptyCell {
+  background: #fafafa;
+  cursor: default;
+}
+
+.weekendCell {
+  background: #f7f9ff;
+}
+
+.weekendCell:hover:not(.emptyCell) {
+  background: #eef3ff;
+}
+
+.selectedCell {
+  background: #eff6ff;
+}
+
+/* ── Day number ── */
+.dayNum {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+}
+
+.todayNum {
+  background: var(--blue);
+  color: #fff;
+}
+
+.selectedNum {
+  outline: 2px solid var(--blue);
+  color: var(--blue);
+}
+
+.todayNum.selectedNum {
+  background: var(--blue);
+  color: #fff;
+  outline: none;
+}
+
+/* ── Workout pill ── */
+.pill {
+  background: var(--blue);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 2px 7px;
+  border-radius: 3px;
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Info bar ── */
+.infoBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 900px;
+  margin-top: 14px;
+  padding: 0 2px;
+}
+
+.infoText {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.viewBtn {
+  background: var(--blue);
+  color: #fff;
+  border: none;
+  padding: 8px 20px;
+  border-radius: var(--radius);
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.viewBtn:hover {
+  background: var(--blue-hover);
+}
