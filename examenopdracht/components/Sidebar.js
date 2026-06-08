@@ -24,16 +24,10 @@ export default function Sidebar() {
 
       <nav style={{ display: "flex", flexDirection: "column", gap: 10 }}>
         <Link
-          href="/dashboard"
-          style={{ color: "inherit", textDecoration: "none" }}
-        >
-          Overzicht
-        </Link>
-        <Link
           href="/workouts"
           style={{ color: "inherit", textDecoration: "none" }}
         >
-          Workouts
+          Overzicht
         </Link>
         <Link
           href="/workouts/new"
