@@ -2,11 +2,12 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
+import ReplaceExerciseModal from '@/components/ReplaceExerciseModal';
 import styles from '@/css/edit.module.css';
 
 export default function EditWorkoutPage() {
-  const router     = useRouter();
-  const { id }     = useParams();
+  const router = useRouter();
+  const { id } = useParams();
 
   const [workout, setWorkout]     = useState(null);
   const [name, setName]           = useState('');
@@ -14,6 +15,7 @@ export default function EditWorkoutPage() {
   const [exercises, setExercises] = useState([]);
   const [loading, setLoading]     = useState(true);
   const [saving, setSaving]       = useState(false);
+  const [replaceIdx, setReplaceIdx] = useState(null); // index of exercise being replaced
 
   useEffect(() => {
     if (!id) return;
@@ -41,6 +43,18 @@ export default function EditWorkoutPage() {
     setExercises(prev =>
       prev.map((ex, idx) => idx === i ? { ...ex, [field]: value } : ex)
     );
+  };
+
+  // Called when user picks an alternative from the modal
+  const handleReplace = (newExercise) => {
+    setExercises(prev =>
+      prev.map((ex, idx) =>
+        idx === replaceIdx
+          ? { ...ex, name: newExercise.name }
+          : ex
+      )
+    );
+    setReplaceIdx(null);
   };
 
   const handleSave = async () => {
@@ -147,6 +161,14 @@ export default function EditWorkoutPage() {
                 </td>
                 <td className={styles.td}>
                   <button
+                    className={styles.replaceBtn}
+                    onClick={() => setReplaceIdx(i)}
+                  >
+                    Vervangen
+                  </button>
+                </td>
+                <td className={styles.td}>
+                  <button
                     className={styles.deleteBtn}
                     onClick={() => removeExercise(i)}
                   >
@@ -171,6 +193,15 @@ export default function EditWorkoutPage() {
           </button>
         </div>
       </div>
+
+      {/* Replace modal — only shown when replaceIdx is set */}
+      {replaceIdx !== null && (
+        <ReplaceExerciseModal
+          exercise={exercises[replaceIdx]}
+          onSelect={handleReplace}
+          onClose={() => setReplaceIdx(null)}
+        />
+      )}
     </div>
   );
 }

@@ -1,17 +1,18 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import styles from '@/css/ReplaceExerciseModal.module.css';
+import styles from '@/css/replace.module.css';
 
 const MUSCLE_GROUPS = ['Alle', 'Borst', 'Schouders', 'Triceps', 'Rug'];
 
 export default function ReplaceExerciseModal({ exercise, onSelect, onClose }) {
-  const [search, setSearch] = useState('');
-  const [filter, setFilter] = useState('Alle');
+  const [search, setSearch]           = useState('');
+  const [filter, setFilter]           = useState('Alle');
   const [alternatives, setAlternatives] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading]         = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     fetch(`/api/exercises?replace=${encodeURIComponent(exercise.name)}`)
       .then(r => r.json())
       .then(data => { setAlternatives(data); setLoading(false); })
@@ -27,6 +28,7 @@ export default function ReplaceExerciseModal({ exercise, onSelect, onClose }) {
   return (
     <div className={styles.overlay} onClick={onClose}>
       <div className={styles.modal} onClick={e => e.stopPropagation()}>
+
         <h2 className={styles.title}>Oefening vervangen</h2>
         <p className={styles.subtitle}>Alternatief kiezen voor {exercise.name}</p>
 
@@ -39,15 +41,12 @@ export default function ReplaceExerciseModal({ exercise, onSelect, onClose }) {
         </div>
 
         {/* Search */}
-        <div className={styles.searchRow}>
-          <label className={styles.searchLabel}>Zoeken</label>
-          <input
-            className={styles.searchInput}
-            value={search}
-            onChange={e => setSearch(e.target.value)}
-            placeholder=""
-          />
-        </div>
+        <label className={styles.searchLabel}>Zoeken</label>
+        <input
+          className={styles.searchInput}
+          value={search}
+          onChange={e => setSearch(e.target.value)}
+        />
 
         {/* Muscle group filters */}
         <div className={styles.filters}>
@@ -64,11 +63,18 @@ export default function ReplaceExerciseModal({ exercise, onSelect, onClose }) {
 
         <h3 className={styles.altTitle}>Alternatieven</h3>
 
-        {loading && <div className={styles.empty}>Laden...</div>}
-
         <div className={styles.altList}>
+          {loading && <div className={styles.empty}>Laden...</div>}
+
+          {!loading && filtered.length === 0 && (
+            <div className={styles.empty}>Geen alternatieven gevonden.</div>
+          )}
+
           {filtered.map((alt, i) => (
-            <div key={i} className={`${styles.altRow} ${i === 0 ? styles.recommended : ''}`}>
+            <div
+              key={i}
+              className={`${styles.altRow} ${i === 0 ? styles.recommended : ''}`}
+            >
               <div className={styles.altInfo}>
                 <div className={styles.altName}>{alt.name}</div>
                 <div className={styles.altMeta}>
@@ -79,18 +85,20 @@ export default function ReplaceExerciseModal({ exercise, onSelect, onClose }) {
               {i === 0 && (
                 <span className={styles.badge}>★ aanbevolen</span>
               )}
-              <button className={styles.selectBtn} onClick={() => onSelect(alt)}>
+              <button
+                className={styles.selectBtn}
+                onClick={() => onSelect(alt)}
+              >
                 Selecteren
               </button>
             </div>
           ))}
-          {!loading && filtered.length === 0 && (
-            <div className={styles.empty}>Geen alternatieven gevonden.</div>
-          )}
         </div>
 
         <div className={styles.actions}>
-          <button className={styles.cancelBtn} onClick={onClose}>Annuleren</button>
+          <button className={styles.cancelBtn} onClick={onClose}>
+            Annuleren
+          </button>
         </div>
       </div>
     </div>
