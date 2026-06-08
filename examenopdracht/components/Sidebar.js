@@ -27,7 +27,7 @@ export default function Sidebar() {
           href="/dashboard"
           style={{ color: "inherit", textDecoration: "none" }}
         >
-          Dashboard
+          Overzicht
         </Link>
         <Link
           href="/workouts"
