@@ -1,12 +1,15 @@
 'use client';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import Link from 'next/link';
+import { useState, useEffect } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import styles from '@/css/new.module.css';
 
 export default function NewWorkoutPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const templateSets = Number(searchParams.get('sets')) || 3;
+  const templateReps = Number(searchParams.get('reps')) || 10;
 
   const [name, setName]         = useState('');
   const [date, setDate]         = useState('');
@@ -16,8 +19,13 @@ export default function NewWorkoutPage() {
   const [exercises, setExercises] = useState([]);
   const [saving, setSaving]     = useState(false);
 
+  // Pre-fill one empty exercise row with template sets/reps
+  useEffect(() => {
+    setExercises([{ name: '', sets: templateSets, reps: templateReps, weight: '' }]);
+  }, []);
+
   const addExercise = () => {
-    setExercises(prev => [...prev, { name: '', sets: '', reps: '', weight: '' }]);
+    setExercises(prev => [...prev, { name: '', sets: templateSets, reps: templateReps, weight: '' }]);
   };
 
   const removeExercise = (i) => {
@@ -53,7 +61,7 @@ export default function NewWorkoutPage() {
   return (
     <div className={styles.page}>
       <div className={styles.header}>
-      <h1 className={styles.title}>Nieuwe workout aanmaken</h1>
+        <h1 className={styles.title}>Nieuwe workout aanmaken</h1>
       </div>
 
       <div className={styles.card}>
@@ -175,7 +183,7 @@ export default function NewWorkoutPage() {
         </button>
 
         <div className={styles.actions}>
-          <button className={styles.btnCancel} onClick={() => router.push('/workouts')}>
+          <button className={styles.btnCancel} onClick={() => router.push('/workouts/templates')}>
             Annuleren
           </button>
           <button className={styles.btnSave} onClick={handleSave} disabled={saving}>
