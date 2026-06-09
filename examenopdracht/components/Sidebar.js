@@ -1,6 +1,12 @@
+"use client";
+
 import Link from "next/link";
+import { signOut, useSession } from "next-auth/react";
+
 
 export default function Sidebar() {
+  const { data: session } = useSession();
+
   return (
     <aside
       style={{
@@ -45,16 +51,37 @@ export default function Sidebar() {
         </Link>
       </nav>
 
-      <div
-        style={{
-          marginTop: "auto",
-          borderTop: "1px solid #666",
-          padding: "15px",
-          color: "#999",
-        }}
-      >
-        Ryan Kalisvaart
-      </div>
+<div style={{ marginTop: "auto" }}>
+  <div
+    style={{
+      paddingBottom: "15px",
+      color: "#999",
+    }}
+  >
+    {session?.user?.name || "Gebruiker"}
+  </div>
+
+  <div
+    style={{
+      borderTop: "1px solid #666",
+      paddingTop: "15px",
+    }}
+  >
+    <button
+      onClick={() => signOut()}
+      style={{
+        width: "100%",
+        padding: "10px",
+        cursor: "pointer",
+        backgroundColor: "red",
+        color: "white",
+        border: "none",
+      }}
+    >
+      Log out
+    </button>
+  </div>
+</div>
     </aside>
   );
 }
