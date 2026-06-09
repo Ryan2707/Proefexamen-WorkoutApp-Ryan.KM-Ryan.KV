@@ -1,13 +1,21 @@
 import { NextResponse } from 'next/server';
+import { auth } from '@/lib/auth';
 import { connectDB } from '@/lib/db';
 import Workout from '@/lib/models/Workout';
 
 export async function GET(req, { params }) {
+  const session = await auth();
+  if (!session) {
+    return NextResponse.json({ error: 'Niet ingelogd' }, { status: 401 });
+  }
+
   await connectDB();
   const { id } = await params;
 
-  const workout = await Workout.findById(id).lean();
-  if (!workout) return NextResponse.json({ error: 'Niet gevonden' }, { status: 404 });
+  const workout = await Workout.findOne({ _id: id, userId: session.user.id }).lean();
+  if (!workout) {
+    return NextResponse.json({ error: 'Niet gevonden' }, { status: 404 });
+  }
 
   return NextResponse.json({
     ...workout,
@@ -17,12 +25,18 @@ export async function GET(req, { params }) {
 }
 
 export async function PUT(req, { params }) {
+  const session = await auth();
+  if (!session) {
+    return NextResponse.json({ error: 'Niet ingelogd' }, { status: 401 });
+  }
+
   await connectDB();
   const { id } = await params;
   const { name, date, exercises } = await req.json();
 
-  const updated = await Workout.findByIdAndUpdate(
-    id,
+  // findOneAndUpdate with userId ensures users can only edit their own workouts
+  const updated = await Workout.findOneAndUpdate(
+    { _id: id, userId: session.user.id },
     {
       name,
       date: date ? new Date(date) : undefined,
@@ -38,7 +52,9 @@ export async function PUT(req, { params }) {
     { new: true }
   );
 
-  if (!updated) return NextResponse.json({ error: 'Niet gevonden' }, { status: 404 });
+  if (!updated) {
+    return NextResponse.json({ error: 'Niet gevonden' }, { status: 404 });
+  }
 
   return NextResponse.json({
     ...updated.toJSON(),
@@ -47,9 +63,15 @@ export async function PUT(req, { params }) {
 }
 
 export async function DELETE(req, { params }) {
+  const session = await auth();
+  if (!session) {
+    return NextResponse.json({ error: 'Niet ingelogd' }, { status: 401 });
+  }
+
   await connectDB();
   const { id } = await params;
 
-  await Workout.findByIdAndDelete(id);
+  // Only delete if it belongs to the logged in user
+  await Workout.findOneAndDelete({ _id: id, userId: session.user.id });
   return NextResponse.json({ ok: true });
 }

@@ -4,9 +4,16 @@ import { connectDB } from '@/lib/db';
 import Workout from '@/lib/models/Workout';
 
 export async function GET() {
+  const session = await auth();
+  if (!session) {
+    return NextResponse.json({ error: 'Niet ingelogd' }, { status: 401 });
+  }
+
   await connectDB();
 
-  const workouts = await Workout.find().sort({ date: -1 }).lean();
+  const workouts = await Workout.find({ userId: session.user.id })
+    .sort({ date: -1 })
+    .lean();
 
   const result = workouts.map(w => ({
     ...w,
@@ -19,8 +26,8 @@ export async function GET() {
 
 export async function POST(req) {
   const session = await auth();
-  if (!session?.user?.id) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  if (!session) {
+    return NextResponse.json({ error: 'Niet ingelogd' }, { status: 401 });
   }
 
   await connectDB();
@@ -33,15 +40,15 @@ export async function POST(req) {
     category: category || 'Kracht',
     durationMin: duration ? Number(duration) : undefined,
     notes,
+    userId: session.user.id,
     exercises: (exercises || [])
       .filter(ex => ex.name?.trim())
       .map(ex => ({
         name:   ex.name.trim(),
-        sets:   Number(ex.sets)   || 3,
-        reps:   Number(ex.reps)   || 10,
+        sets:   Number(ex.sets)       || 3,
+        reps:   Number(ex.reps)       || 10,
         weight: parseFloat(ex.weight) || 0,
       })),
-    userId: session.user.id,
   });
 
   return NextResponse.json(
