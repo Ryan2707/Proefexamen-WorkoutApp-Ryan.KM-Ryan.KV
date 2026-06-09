@@ -52,7 +52,9 @@ export default function NewWorkoutPage() {
 
   return (
     <div className={styles.page}>
+      <div className={styles.header}>
       <h1 className={styles.title}>Nieuwe workout aanmaken</h1>
+      </div>
 
       <div className={styles.card}>
         <h2 className={styles.sectionTitle}>Details</h2>

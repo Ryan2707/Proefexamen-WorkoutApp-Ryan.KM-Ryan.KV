@@ -3,12 +3,20 @@
   max-width: 900px;
 }
 
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+  border-bottom: 2px solid var(--border);
+}
+
 .title {
+  margin: 0;
   font-size: 22px;
   font-weight: 700;
   color: var(--text-primary);
-  letter-spacing: -0.3px;
-  margin-bottom: 24px;
 }
 
 /* ── Card ── */

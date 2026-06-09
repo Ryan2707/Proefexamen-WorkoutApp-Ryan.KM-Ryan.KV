@@ -119,6 +119,20 @@
   max-width: 72px;
 }
 
+.replaceBtn {
+  background: transparent;
+  color: var(--blue);
+  border: 1px solid var(--blue);
+  padding: 5px 14px;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.replaceBtn:hover {
+  background: rgba(59, 130, 246, 0.1);
+}
+
 .deleteBtn {
   background: transparent;
   border: 1px solid #fca5a5;

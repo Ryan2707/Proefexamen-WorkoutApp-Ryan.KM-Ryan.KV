@@ -100,6 +100,17 @@
 .replaceBtn {
   background: var(--blue);
   color: #fff;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.replaceBtn:hover {
+  background: var(--blue-hover);
 }
 
 .deleteBtn {
