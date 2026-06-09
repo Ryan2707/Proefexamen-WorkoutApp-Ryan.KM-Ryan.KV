@@ -2,8 +2,6 @@ import { NextResponse } from 'next/server';
 import { connectDB } from '@/lib/db';
 import Exercise from '@/lib/models/Exercise';
 
-// Hardcoded fallback alternatives per exercise name
-// Used when the Exercise collection in MongoDB is empty
 const FALLBACKS = {
   'Bench Press': [
     { name: 'Dumbbell Bench Press', muscleGroups: ['Borst', 'Triceps'], note: 'vergelijkbare beweging' },
@@ -24,10 +22,8 @@ const FALLBACKS = {
 };
 
 function getFallback(exerciseName) {
-  // Try exact match first
   if (FALLBACKS[exerciseName]) return FALLBACKS[exerciseName];
 
-  // Otherwise return a generic list excluding the exercise itself
   return Object.values(FALLBACKS)
     .flat()
     .filter(e => e.name !== exerciseName);
@@ -41,7 +37,6 @@ export async function GET(req) {
 
   await connectDB();
 
-  // Fetch alternatives for a specific exercise
   if (replace) {
     const exercises = await Exercise.find().lean();
 
@@ -56,7 +51,6 @@ export async function GET(req) {
       return NextResponse.json(alts.map(e => ({ ...e, _id: e._id.toString() })));
     }
 
-    // Fall back to hardcoded list
     let fallback = getFallback(replace);
     if (muscle && muscle !== 'Alle') {
       fallback = fallback.filter(e => (e.muscleGroups || []).includes(muscle));
@@ -67,7 +61,6 @@ export async function GET(req) {
     return NextResponse.json(fallback);
   }
 
-  // General exercise list
   const query = {};
   if (search) query.name = { $regex: search, $options: 'i' };
   if (muscle && muscle !== 'Alle') query.muscleGroups = muscle;

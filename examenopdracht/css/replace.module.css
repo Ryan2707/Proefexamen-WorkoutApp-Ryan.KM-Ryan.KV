@@ -20,7 +20,7 @@
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
 }
 
-/* ── Header ── */
+
 .title {
   font-size: 18px;
   font-weight: 700;
@@ -35,7 +35,7 @@
   margin-bottom: 16px;
 }
 
-/* ── Current exercise ── */
+
 .currentCard {
   border: 2px solid var(--blue);
   border-radius: var(--radius);
@@ -55,7 +55,7 @@
   margin-top: 2px;
 }
 
-/* ── Search ── */
+
 .searchLabel {
   display: block;
   font-size: 12px;
@@ -78,7 +78,7 @@
   border-color: var(--blue);
 }
 
-/* ── Muscle group filters ── */
+
 .filters {
   display: flex;
   gap: 8px;
@@ -114,7 +114,7 @@
   color: #fff;
 }
 
-/* ── Alternatives ── */
+
 .altTitle {
   font-size: 14px;
   font-weight: 600;
@@ -201,7 +201,7 @@
   font-size: 13px;
 }
 
-/* ── Actions ── */
+
 .actions {
   display: flex;
   justify-content: flex-end;

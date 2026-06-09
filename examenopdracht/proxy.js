@@ -15,12 +15,12 @@ export default auth((req) => {
     nextUrl.pathname.startsWith(route)
   );
 
-  // Niet ingelogd & probeert beveiligde pagina te bezoeken
+  
   if (isProtected && !isLoggedIn) {
     return NextResponse.redirect(new URL('/login', nextUrl));
   }
 
-  // Ingelogd & bezoekt login/register → doorsturen naar dashboard
+  
   if (isAuthRoute && isLoggedIn) {
     return NextResponse.redirect(new URL('/dashboard', nextUrl));
   }

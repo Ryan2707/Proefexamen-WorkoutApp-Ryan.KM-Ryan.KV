@@ -3,7 +3,7 @@
   width: 100%;
 }
 
-/* ── Header ── */
+
 .header {
   display: flex;
   align-items: center;
@@ -20,7 +20,7 @@
   letter-spacing: -0.3px;
 }
 
-/* ── Filters ── */
+
 .filters {
   display: flex;
   gap: 8px;
@@ -55,7 +55,7 @@
   color: #fff;
 }
 
-/* ── List ── */
+
 .list {
   display: flex;
   flex-direction: column;
@@ -94,7 +94,7 @@
   color: var(--text-muted);
 }
 
-/* ── Buttons ── */
+
 .btnPrimary {
   background: var(--blue);
   color: #fff;

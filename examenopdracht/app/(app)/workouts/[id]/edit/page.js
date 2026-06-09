@@ -15,7 +15,7 @@ export default function EditWorkoutPage() {
   const [exercises, setExercises] = useState([]);
   const [loading, setLoading]     = useState(true);
   const [saving, setSaving]       = useState(false);
-  const [replaceIdx, setReplaceIdx] = useState(null); // index of exercise being replaced
+  const [replaceIdx, setReplaceIdx] = useState(null); 
 
   useEffect(() => {
     if (!id) return;
@@ -45,7 +45,7 @@ export default function EditWorkoutPage() {
     );
   };
 
-  // Called when user picks an alternative from the modal
+  
   const handleReplace = (newExercise) => {
     setExercises(prev =>
       prev.map((ex, idx) =>
@@ -194,7 +194,7 @@ export default function EditWorkoutPage() {
         </div>
       </div>
 
-      {/* Replace modal — only shown when replaceIdx is set */}
+      {}
       {replaceIdx !== null && (
         <ReplaceExerciseModal
           exercise={exercises[replaceIdx]}

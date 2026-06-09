@@ -10,7 +10,7 @@
   margin-bottom: 20px;
 }
 
-/* ── Calendar card ── */
+
 .calendarCard {
   background: var(--content-bg);
   border: 1px solid var(--border);
@@ -19,7 +19,7 @@
   max-width: 900px;
 }
 
-/* ── Navigation ── */
+
 .navRow {
   display: flex;
   align-items: center;
@@ -50,7 +50,7 @@
   color: var(--text-primary);
 }
 
-/* ── Day headers ── */
+
 .dayHeaders {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -72,7 +72,7 @@
   background: #f0f6ff;
 }
 
-/* ── Calendar rows ── */
+
 .calRow {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -83,7 +83,7 @@
   border-bottom: none;
 }
 
-/* ── Cells ── */
+
 .cell {
   min-height: 72px;
   padding: 6px 8px;
@@ -118,7 +118,7 @@
   background: #eff6ff;
 }
 
-/* ── Day number ── */
+
 .dayNum {
   font-size: 13px;
   font-weight: 500;
@@ -148,7 +148,7 @@
   outline: none;
 }
 
-/* ── Workout pill ── */
+
 .pill {
   background: var(--blue);
   color: #fff;
@@ -162,7 +162,7 @@
   text-overflow: ellipsis;
 }
 
-/* ── Info bar ── */
+
 .infoBar {
   display: flex;
   align-items: center;

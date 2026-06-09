@@ -28,7 +28,6 @@ export default function WorkoutsPage() {
 
   return (
     <div className={styles.page}>
-      {/* Header */}
       <div className={styles.header}>
         <h1 className={styles.title}>Mijn Workouts</h1>
 
@@ -37,7 +36,6 @@ export default function WorkoutsPage() {
         </Link>
       </div>
 
-      {/* Category filters */}
       <div className={styles.filters}>
         {FILTERS.map((f) => (
           <button
@@ -50,7 +48,6 @@ export default function WorkoutsPage() {
         ))}
       </div>
 
-      {/* Workout list */}
       <div className={styles.list}>
         {loading && <div className={styles.empty}>Laden...</div>}
 

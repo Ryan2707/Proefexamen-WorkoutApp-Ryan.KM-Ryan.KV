@@ -32,7 +32,6 @@ export default function ReplaceExerciseModal({ exercise, onSelect, onClose }) {
         <h2 className={styles.title}>Oefening vervangen</h2>
         <p className={styles.subtitle}>Alternatief kiezen voor {exercise.name}</p>
 
-        {/* Current exercise */}
         <div className={styles.currentCard}>
           <div className={styles.currentName}>{exercise.name}</div>
           <div className={styles.currentMeta}>
@@ -40,7 +39,6 @@ export default function ReplaceExerciseModal({ exercise, onSelect, onClose }) {
           </div>
         </div>
 
-        {/* Search */}
         <label className={styles.searchLabel}>Zoeken</label>
         <input
           className={styles.searchInput}
@@ -48,7 +46,6 @@ export default function ReplaceExerciseModal({ exercise, onSelect, onClose }) {
           onChange={e => setSearch(e.target.value)}
         />
 
-        {/* Muscle group filters */}
         <div className={styles.filters}>
           {MUSCLE_GROUPS.map(g => (
             <button

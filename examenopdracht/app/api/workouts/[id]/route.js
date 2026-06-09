@@ -34,7 +34,6 @@ export async function PUT(req, { params }) {
   const { id } = await params;
   const { name, date, exercises } = await req.json();
 
-  // findOneAndUpdate with userId ensures users can only edit their own workouts
   const updated = await Workout.findOneAndUpdate(
     { _id: id, userId: session.user.id },
     {
@@ -71,7 +70,6 @@ export async function DELETE(req, { params }) {
   await connectDB();
   const { id } = await params;
 
-  // Only delete if it belongs to the logged in user
   await Workout.findOneAndDelete({ _id: id, userId: session.user.id });
   return NextResponse.json({ ok: true });
 }

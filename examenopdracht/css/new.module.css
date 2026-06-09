@@ -19,7 +19,7 @@
   color: var(--text-primary);
 }
 
-/* ── Card ── */
+
 .card {
   background: var(--content-bg);
   border: 1px solid var(--border);
@@ -34,7 +34,7 @@
   margin-bottom: 16px;
 }
 
-/* ── Form ── */
+
 .row2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -85,7 +85,7 @@
   border-color: var(--blue);
 }
 
-/* ── Exercise table ── */
+
 .table {
   width: 100%;
   border-collapse: collapse;
@@ -146,7 +146,7 @@
   background: var(--red-light);
 }
 
-/* ── Add exercise ── */
+
 .addExerciseBtn {
   background: transparent;
   border: 1px solid var(--blue);
@@ -163,7 +163,7 @@
   background: var(--blue-light);
 }
 
-/* ── Actions ── */
+
 .actions {
   display: flex;
   justify-content: flex-end;

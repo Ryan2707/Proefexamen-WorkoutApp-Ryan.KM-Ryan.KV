@@ -14,7 +14,7 @@ function getDaysInMonth(year, month) {
   return new Date(year, month + 1, 0).getDate();
 }
 
-// Returns 0 (Mon) through 6 (Sun)
+
 function getFirstWeekday(year, month) {
   const day = new Date(year, month, 1).getDay();
   return day === 0 ? 6 : day - 1;
@@ -48,7 +48,7 @@ export default function AgendaPage() {
     setSelectedDay(null);
   };
 
-  // Group workouts by day number for the current month/year
+  
   const workoutsByDay = {};
   workouts.forEach(w => {
     if (!w.date) return;
@@ -60,7 +60,7 @@ export default function AgendaPage() {
     }
   });
 
-  // Build grid: empty leading cells + day numbers
+  
   const daysInMonth = getDaysInMonth(viewYear, viewMonth);
   const firstDay    = getFirstWeekday(viewYear, viewMonth);
   const cells       = [
@@ -77,7 +77,7 @@ export default function AgendaPage() {
     viewMonth === today.getMonth() &&
     viewYear === today.getFullYear();
 
-  // Info bar for selected day
+  
   const selectedWorkouts = selectedDay ? (workoutsByDay[selectedDay] || []) : [];
   const selectedWorkout  = selectedWorkouts[0] || null;
 
@@ -92,14 +92,14 @@ export default function AgendaPage() {
       </h1>
 
       <div className={styles.calendarCard}>
-        {/* Navigation */}
+        {}
         <div className={styles.navRow}>
           <button className={styles.navBtn} onClick={prevMonth}>{'< Vorige'}</button>
           <span className={styles.monthLabel}>{MONTHS[viewMonth]} {viewYear}</span>
           <button className={styles.navBtn} onClick={nextMonth}>{'Volgende >'}</button>
         </div>
 
-        {/* Day headers */}
+        {}
         <div className={styles.dayHeaders}>
           {DAYS.map(d => (
             <div
@@ -111,7 +111,7 @@ export default function AgendaPage() {
           ))}
         </div>
 
-        {/* Calendar rows */}
+        {}
         {rows.map((row, ri) => (
           <div key={ri} className={styles.calRow}>
             {row.map((day, ci) => {
@@ -154,7 +154,7 @@ export default function AgendaPage() {
         ))}
       </div>
 
-      {/* Selected day info bar */}
+      {}
       {selectedWorkout && (
         <div className={styles.infoBar}>
           <span className={styles.infoText}>
