@@ -1,6 +1,6 @@
 .page {
-  padding: 32px 40px;
-  max-width: 900px;
+  padding: 16px;
+  width: 100%;
 }
 
 /* ── Header ── */
@@ -8,7 +8,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 24px;
+  margin-bottom: 8px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--border);
 }
 
 .title {
@@ -55,10 +57,9 @@
 
 /* ── List ── */
 .list {
-  background: var(--content-bg);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .workoutRow {
@@ -66,7 +67,9 @@
   align-items: center;
   justify-content: space-between;
   padding: 14px 20px;
-  border-bottom: 1px solid var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--content-bg);
 }
 
 .workoutRow:last-child {
@@ -97,10 +100,11 @@
   color: #fff;
   border: none;
   padding: 8px 18px;
-  border-radius: var(--radius);
-  font-weight: 600;
+  border-radius: 4px;
   font-size: 14px;
-  transition: background 0.15s;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s ease;
 }
 
 .btnPrimary:hover {

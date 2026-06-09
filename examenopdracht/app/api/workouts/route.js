@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { auth } from '@/lib/auth';
 import { connectDB } from '@/lib/db';
 import Workout from '@/lib/models/Workout';
 
@@ -17,6 +18,11 @@ export async function GET() {
 }
 
 export async function POST(req) {
+  const session = await auth();
+  if (!session?.user?.id) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
   await connectDB();
 
   const { name, date, category, duration, notes, exercises } = await req.json();
@@ -35,6 +41,7 @@ export async function POST(req) {
         reps:   Number(ex.reps)   || 10,
         weight: parseFloat(ex.weight) || 0,
       })),
+    userId: session.user.id,
   });
 
   return NextResponse.json(

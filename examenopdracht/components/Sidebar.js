@@ -15,11 +15,13 @@ export default function Sidebar() {
         minHeight: "100vh",
       }}
     >
-      <div>
+      <div
+        style={{
+          borderBottom: "1px solid #666",
+          paddingBottom: "15px",
+        }}
+      >
         <h1 style={{ margin: 0, fontSize: 22 }}>WorkoutApp</h1>
-        <p style={{ marginTop: 8, color: "var(--sidebar-text)" }}>
-          Jouw dashboard
-        </p>
       </div>
 
       <nav style={{ display: "flex", flexDirection: "column", gap: 10 }}>
@@ -30,16 +32,16 @@ export default function Sidebar() {
           Overzicht
         </Link>
         <Link
-          href="/workouts/new"
-          style={{ color: "inherit", textDecoration: "none" }}
-        >
-          Nieuwe workout
-        </Link>
-        <Link
           href="/agenda"
           style={{ color: "inherit", textDecoration: "none" }}
         >
           Agenda
+        </Link>
+        <Link
+          href="/workouts/new"
+          style={{ color: "inherit", textDecoration: "none" }}
+        >
+          Nieuwe workout
         </Link>
       </nav>
 

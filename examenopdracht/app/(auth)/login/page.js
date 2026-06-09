@@ -57,7 +57,7 @@ export default function LoginPage() {
       if (result?.error) {
         setServerError('Ongeldig e-mailadres of wachtwoord. Controleer je gegevens.');
       } else {
-        router.push('/dashboard');
+        router.push('/workouts');
         router.refresh();
       }
     } catch {
