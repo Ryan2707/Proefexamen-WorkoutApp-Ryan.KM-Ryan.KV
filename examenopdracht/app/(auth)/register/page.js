@@ -16,7 +16,6 @@ export default function RegisterPage() {
   });
   const [errors, setErrors] = useState({});
   const [serverError, setServerError] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
   const [loading, setLoading] = useState(false);
 
   function handleChange(e) {
@@ -68,7 +67,6 @@ export default function RegisterPage() {
 
     setLoading(true);
     setServerError('');
-    setSuccessMessage('');
 
     try {
       const response = await fetch('/api/users', {
@@ -86,11 +84,9 @@ export default function RegisterPage() {
       if (!response.ok) {
         setServerError(data.error || 'Registratie mislukt. Probeer het opnieuw.');
       } else {
-        setSuccessMessage(`Account aangemaakt! Je unieke ID: ${data.userId}`);
-        setTimeout(() => {
           router.push('/login');
-        }, 2500);
       }
+      
     } catch {
       setServerError('Er is een verbindingsfout opgetreden. Probeer het opnieuw.');
     } finally {
@@ -118,15 +114,6 @@ export default function RegisterPage() {
                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
               </svg>
               {serverError}
-            </div>
-          )}
-
-          {successMessage && (
-            <div className={styles.alertSuccess}>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-              </svg>
-              {successMessage} — je wordt doorgestuurd...
             </div>
           )}
 
@@ -201,7 +188,7 @@ export default function RegisterPage() {
           <button
             type="submit"
             className={styles.submitBtn}
-            disabled={loading || !!successMessage}
+            disabled={loading}
           >
             {loading ? (
               <span className={styles.btnContent}>
