@@ -169,7 +169,7 @@ export default function AgendaPage() {
           </span>
           <button
             className={styles.viewBtn}
-            onClick={() => router.push(`/workouts/${selectedWorkout._id}/edit`)}
+            onClick={() => router.push(`/workouts/${selectedWorkout._id}/start`)}
           >
             Bekijken
           </button>
